@@ -43,13 +43,13 @@ export class HiddenObject extends Phaser.GameObjects.Container {
 
     // Add hover effect
     this.on('pointerover', () => {
-      if (!this.found) {
+      if (!this.found && this.sprite instanceof Phaser.GameObjects.Sprite) {
         this.sprite.setTint(0xffff00);
       }
     });
 
     this.on('pointerout', () => {
-      if (!this.found) {
+      if (!this.found && this.sprite instanceof Phaser.GameObjects.Sprite) {
         this.sprite.clearTint();
       }
     });
@@ -70,7 +70,9 @@ export class HiddenObject extends Phaser.GameObjects.Container {
     this.disableInteractive();
 
     // Visual feedback
-    this.sprite.setTint(0x00ff00);
+    if (this.sprite instanceof Phaser.GameObjects.Sprite) {
+      this.sprite.setTint(0x00ff00);
+    }
 
     // Animate
     this.scene.tweens.add({
